@@ -1,0 +1,21 @@
+<input type="file" id="fileInput" />
+<button onclick="uploadImage()">Subir imagen</button>
+
+<script>
+async function uploadImage() {
+  const file = document.getElementById("fileInput").files[0];
+  const url = `https://api.cloudinary.com/v1_1/${window.CLOUDINARY_CONFIG.cloudName}/upload`;
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", window.CLOUDINARY_CONFIG.uploadPreset);
+
+  const res = await fetch(url, {
+    method: "POST",
+    body: formData
+  });
+
+  const data = await res.json();
+  console.log("Imagen subida:", data.secure_url);
+  alert("Imagen subida: " + data.secure_url);
+}
+</script>

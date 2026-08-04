@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de administración — Pet Shop Los Hermanos</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐾</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="paw-field" aria-hidden="true"></div>
+
+  <header class="top-bar">
+    <a href="admin.html" class="brand">
+      <span class="logo-mark">🐾</span>
+      <span class="logo-text">Pet Shop<br /><small>Panel admin</small></span>
+    </a>
+    <div class="top-actions">
+      <span style="color:#fff; font-weight:700; font-size:13.5px;" id="admin-email"></span>
+      <button class="btn btn-sun" id="btn-ver-tienda">👀 Ver tienda</button>
+      <button class="btn btn-ghost-light" id="btn-logout">Cerrar sesión</button>
+    </div>
+  </header>
+
+  <div id="badge-modo"></div>
+
+  <main class="admin-wrap">
+    <div class="admin-grid">
+
+      <!-- Formulario -->
+      <section class="panel">
+        <h2 id="titulo-form">🐾 Agregar producto</h2>
+        <p class="panel-sub">Los campos marcados con <span class="required-star">*</span> son obligatorios</p>
+
+        <form id="form-producto">
+          <div class="field">
+            <label for="f-imagen">Foto del producto</label>
+            <div class="image-drop" id="drop-zone">
+              <img id="preview-img" class="preview" alt="Vista previa" />
+              <div id="drop-icon" class="drop-icon">📷</div>
+              <div class="drop-text" id="drop-text">Toca para elegir una foto</div>
+            </div>
+            <input type="file" id="f-imagen" accept="image/*" style="display:none;" />
+          </div>
+
+          <div class="field">
+            <label for="f-nombre">Nombre del producto <span class="required-star">*</span></label>
+            <input type="text" id="f-nombre" placeholder="Ej. Croquetas Cachorro Feliz" required />
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="f-precio">Precio (RD$) <span class="required-star">*</span></label>
+              <input type="number" id="f-precio" placeholder="0" min="0" step="1" required />
+            </div>
+            <div class="field">
+              <label for="f-categoria">Categoría <span class="required-star">*</span></label>
+              <select id="f-categoria" required>
+                <option value="">Elegir...</option>
+                <!-- Las categorías se cargan dinámicamente desde admin.js -->
+                <option value="__nueva__">➕ Agregar categoría nueva</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="categoria-panel" id="panel-nueva-categoria">
+            <div class="field" style="margin-bottom:10px;">
+              <label for="nc-nombre">Nombre de la nueva categoría</label>
+              <input type="text" id="nc-nombre" placeholder="Ej. Peceras" />
+            </div>
+            <label style="display:block; font-family:var(--font-display); font-size:13.5px; font-weight:600; margin-bottom:4px;">Elige un emoji para representarla</label>
+            <div class="emoji-grid" id="emoji-grid"></div>
+            <div style="display:flex; gap:8px;">
+              <button type="button" class="btn btn-coral" id="btn-guardar-categoria" style="flex:1; justify-content:center;">Guardar categoría</button>
+              <button type="button" class="btn btn-outline" id="btn-cancelar-categoria">Cancelar</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="f-marca">Marca o descripción <span style="color:var(--plum-soft); font-weight:600;">(opcional)</span></label>
+            <textarea id="f-marca" placeholder="Ej. Feliz Can · 3 kg, sabor pollo"></textarea>
+            <p class="hint">Cualquier detalle extra que quieras mostrar: marca, tamaño, sabor, etc.</p>
+          </div>
+
+          <div style="display:flex; gap:10px;">
+            <button type="submit" class="btn btn-coral" id="btn-guardar" style="flex:1; justify-content:center;">Guardar producto</button>
+            <button type="button" class="btn btn-outline" id="btn-cancelar-edicion" style="display:none;">Cancelar</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Lista de productos -->
+      <section class="panel">
+        <h2>📦 Productos publicados <span style="font-size:14px; color:var(--plum-soft);">(<span id="contador-productos">0</span>)</span></h2>
+        <p class="panel-sub">Así se ven en la tienda ahora mismo</p>
+        <div class="product-list" id="lista-productos"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="js/env.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/boot.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
